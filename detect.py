@@ -7,16 +7,16 @@ Usage:
 """
 
 import argparse
-from genericpath import isdir
 import sys
 from pathlib import Path
-import os 
+
 import cv2
 import numpy as np
-from numpy.lib.npyio import save
 import torch
 import torch.backends.cudnn as cudnn
+
 import shutil
+import os
 
 
 FILE = Path(__file__).resolve()
@@ -51,7 +51,7 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
         augment=False,  # augmented inference
         visualize=False,  # visualize features
         update=False,  # update all models
-        project='./videoResults/',  # save results to project/name
+        project='runs/detect',  # save results to project/name
         name='exp',  # save results to project/name
         exist_ok=False,  # existing project/name ok, do not increment
         line_thickness=3,  # bounding box thickness (pixels)
@@ -65,7 +65,6 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
 
     # Directories
     save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  # increment run
-    print( str( save_dir ) )
     (save_dir / 'labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
 
     # Initialize
@@ -220,11 +219,9 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
                         if save_crop:
                             save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
+            # Print time (inference-only)
+            # print(f'{s}Done. ({t3 - t2:.3f}s)')
 
-            
-            #print(f'{s}Done. ({t3 - t2:.3f}s)')
-
-            
             # Stream results
             im0 = annotator.result()
             if view_img:
@@ -235,6 +232,15 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
             if save_img:
                 if dataset.mode == 'image':
                     cv2.imwrite(save_path, im0)
+                    if( 'Person' in s or 'Weapon' in s or 'Knife' in s or 'Drink' in s):
+                        folderPath = './foundObjects/'
+                        saveFolderName = save_path.split("\\")
+                        if not os.path.isdir(folderPath + saveFolderName[2]):
+                            os.mkdir(folderPath + saveFolderName[2])
+                        #print(save_path, folderPath + saveFolderName[2] + '/' + saveFolderName[-1])
+                        #cv2.imwrite(save_path, folderPath + saveFolderName[2] + '/' + saveFolderName[-1], im0)
+                        shutil.copy( save_path, folderPath + saveFolderName[2] + '/' + saveFolderName[-1] )
+
                 else:  # 'video' or 'stream'
                     if vid_path[i] != save_path:  # new video
                         vid_path[i] = save_path
@@ -250,24 +256,13 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
                         vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
                     vid_writer[i].write(im0)
 
-
-
-            if( 'Person' in s or 'Weapon' in s or 'Knife' in s or 'Drink' in s):             
-                folderPath = './foundObjects/'
-                saveFolderName = save_path.split("/")
-                if not os.path.isdir(folderPath + saveFolderName[2]):
-                    os.mkdir(folderPath + saveFolderName[2])
-                shutil.copy( save_path, folderPath + saveFolderName[2] + '/' + saveFolderName[-1] )
-
-
-
-
     # Print results
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image
-    print(f'Speed: %.1fms pre-process, %.1fms inference, %.1fms NMS per image at shape {(1, 3, *imgsz)}' % t)
+    #print(f'Speed: %.1fms pre-process, %.1fms inference, %.1fms NMS per image at shape {(1, 3, *imgsz)}' % t)
     if save_txt or save_img:
         s = f"\n{len(list(save_dir.glob('labels/*.txt')))} labels saved to {save_dir / 'labels'}" if save_txt else ''
-        print(f"Results saved to {colorstr('bold', save_dir)}{s}")
+        #print(f"Results saved to {colorstr('bold', save_dir)}{s}")
+        pass
     if update:
         strip_optimizer(weights)  # update model (to fix SourceChangeWarning)
 
@@ -300,7 +295,7 @@ def parse_opt():
     parser.add_argument('--half', action='store_true', help='use FP16 half-precision inference')
     opt = parser.parse_args()
     opt.imgsz *= 2 if len(opt.imgsz) == 1 else 1  # expand
-    print_args(FILE.stem, opt)
+    #print_args(FILE.stem, opt)
     return opt
 
 

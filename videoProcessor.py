@@ -9,11 +9,10 @@ import concurrent.futures
 
 def videoProcessor( pathFile ): 
 
-
     count = 0
     cap = cv2.VideoCapture( pathFile )
     frameRate =  cap.get( 5 )
-    video_file_name = pathFile.split("/")[-1][0:-4]
+    video_file_name = pathFile.split("\\")[-1][0:-4]
 
     while( cap.isOpened() ):
 
@@ -34,7 +33,7 @@ def videoProcessor( pathFile ):
         count += 1
 
     cap.release()
-    os.system("python3 detect.py --weights best.pt --img 640 --conf 0.25 --source ./unstructuredVideos/" + video_file_name + "/")
+    os.system("python detect.py --weights best.pt --img 640 --conf 0.25 --source ./unstructuredVideos/" + video_file_name + "/")
  
 
 
@@ -53,8 +52,8 @@ def videoProcessor( pathFile ):
 
 
 #exampleFunction()
-
-videoPaths = ['/home/nacho/Desktop/videos/kof.mp4', '/home/nacho/Desktop/videos/bb.mp4', '/home/nacho/Desktop/videos/weapons.mp4']
+#D:\TEC\SO\primerProyecto\VideoProcessor\videos\\
+videoPaths = ['D:\TEC\SO\primerProyecto\VideoProcessor\\videos\\disparos.mp4']
 
 def multiProcessing():
   start = time.perf_counter()
@@ -64,4 +63,8 @@ def multiProcessing():
   print(f'Duration: {time.perf_counter() - start}')
 
 
-multiProcessing()
+
+
+if __name__ == '__main__':
+  #videoProcessor('D:\TEC\SO\primerProyecto\VideoProcessor\\videos\\disparos.mp4')
+  multiProcessing()
