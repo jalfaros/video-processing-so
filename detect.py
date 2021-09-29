@@ -7,13 +7,17 @@ Usage:
 """
 
 import argparse
+from genericpath import isdir
 import sys
 from pathlib import Path
-
+import os 
 import cv2
 import numpy as np
+from numpy.lib.npyio import save
 import torch
 import torch.backends.cudnn as cudnn
+import shutil
+
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]  # YOLOv5 root directory
@@ -47,7 +51,7 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
         augment=False,  # augmented inference
         visualize=False,  # visualize features
         update=False,  # update all models
-        project='runs/detect',  # save results to project/name
+        project='./videoResults/',  # save results to project/name
         name='exp',  # save results to project/name
         exist_ok=False,  # existing project/name ok, do not increment
         line_thickness=3,  # bounding box thickness (pixels)
@@ -61,6 +65,7 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
 
     # Directories
     save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  # increment run
+    print( str( save_dir ) )
     (save_dir / 'labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
 
     # Initialize
@@ -215,9 +220,11 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
                         if save_crop:
                             save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
-            # Print time (inference-only)
-            print(f'{s}Done. ({t3 - t2:.3f}s)')
 
+            
+            #print(f'{s}Done. ({t3 - t2:.3f}s)')
+
+            
             # Stream results
             im0 = annotator.result()
             if view_img:
@@ -242,6 +249,18 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
                             save_path += '.mp4'
                         vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
                     vid_writer[i].write(im0)
+
+
+
+            if( 'Person' in s or 'Weapon' in s or 'Knife' in s or 'Drink' in s):             
+                folderPath = './foundObjects/'
+                saveFolderName = save_path.split("/")
+                if not os.path.isdir(folderPath + saveFolderName[2]):
+                    os.mkdir(folderPath + saveFolderName[2])
+                shutil.copy( save_path, folderPath + saveFolderName[2] + '/' + saveFolderName[-1] )
+
+
+
 
     # Print results
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image
