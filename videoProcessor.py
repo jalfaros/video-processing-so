@@ -3,17 +3,17 @@ import cv2
 import math
 import os
 from os import mkdir
+import time
+import concurrent.futures
 
-
-
-pathFile = '/home/nacho/Desktop/videos/kof.mp4'
 
 def videoProcessor( pathFile ): 
-    
+
+
     count = 0
-    videoFile = pathFile
-    cap = cv2.VideoCapture( videoFile )
+    cap = cv2.VideoCapture( pathFile )
     frameRate =  cap.get( 5 )
+    video_file_name = pathFile.split("/")[-1][0:-4]
 
     while( cap.isOpened() ):
 
@@ -23,28 +23,45 @@ def videoProcessor( pathFile ):
       if not ret:
         break
 
-
       if (frameId % math.floor( frameRate ) == 0):
 
-        video_file_name = pathFile.split("/")[-1][0:-4]
-        
-        if ( os.path.isdir('./unstructuredVideos/' + video_file_name) ):
-          writeFile(video_file_name, count, frame)
-          count+=1
-        else:
-
+    
+        if not  os.path.isdir('./unstructuredVideos/' + video_file_name):
           mkdir('./unstructuredVideos/' + video_file_name)
-          writeFile( video_file_name, count, frame )      
-          count += 1
+          
+        filename = './unstructuredVideos/'+video_file_name+"/" + video_file_name +"%d.jpg" % count;
+        cv2.imwrite( filename, frame )
+        count += 1
 
     cap.release()
+    os.system("python3 detect.py --weights best.pt --img 640 --conf 0.25 --source ./unstructuredVideos/" + video_file_name + "/")
+ 
 
 
 
-def writeFile( video_file_name,count, frame ):
-  filename = './unstructuredVideos/'+video_file_name+"/" + video_file_name +"%d.jpg" % count;
-  print(filename)
-  cv2.imwrite( filename, frame )
+# threads = list();
+# pathList = ['/home/nacho/Desktop/videos/kof.mp4', '/home/nacho/Desktop/videos/bb.mp4']
 
 
-videoProcessor( pathFile )
+# def exampleFunction():
+#   for i in range(len(pathList)):
+#     thread = threading.Thread(target=videoProcessor, args=( pathList[i], ))
+#     threads.append(thread)
+#     thread.start()
+
+
+
+
+#exampleFunction()
+
+videoPaths = ['/home/nacho/Desktop/videos/kof.mp4', '/home/nacho/Desktop/videos/bb.mp4', '/home/nacho/Desktop/videos/weapons.mp4']
+
+def multiProcessing():
+  start = time.perf_counter()
+  with concurrent.futures.ProcessPoolExecutor() as executor:
+    for videoNamePath in videoPaths:
+      executor.submit( videoProcessor, videoNamePath )
+  print(f'Duration: {time.perf_counter() - start}')
+
+
+multiProcessing()

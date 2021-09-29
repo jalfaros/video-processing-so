@@ -222,12 +222,9 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
 
 
             
-            print(f'{s}Done. ({t3 - t2:.3f}s)')
+            #print(f'{s}Done. ({t3 - t2:.3f}s)')
 
             
-
-
-
             # Stream results
             im0 = annotator.result()
             if view_img:
@@ -252,6 +249,7 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
                             save_path += '.mp4'
                         vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
                     vid_writer[i].write(im0)
+
 
 
             if( 'Person' in s or 'Weapon' in s or 'Knife' in s or 'Drink' in s):             
