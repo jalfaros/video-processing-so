@@ -1,9 +1,18 @@
-## Analización de videos mediante la utilización de YoloV5
+Instituto Tecnológico de Costa Rica <br>
+Campus Tecnológico Local San Carlos <br>
+Principios de Sistemas Operativos - II Semestre 2021 <br>
 
+Proyecto creado por:
+- Jose Ignacio Alfaro Solano <a href="https://github.com/jalfaros">GitHub<a/>
+- Warner Fidel Hurtado Laguna <a href="https://github.com/warnerHurtado">GitHub<a/>
+  
 
-Primeramente, para realizar el análisis de los distintos videos se utilizó el software llamado <strong>Yolo</strong> en su última versión <strong>5</strong> <br />
+# Análisis de videos mediante la utilización del software llamado **YoloV5**
 
-## Entrenamiento
+Primeramente, para realizar el análisis de los distintos videos se utilizó el software llamado <strong>Yolo</strong> en su última versión <strong>5</strong> <br /> el cual
+se utiliza para la identificación de atributos en videos y/o imágenes.
+
+## Entrenamiento realizado
 
 El software anteriormente utilizado brinda un modelo previamente entrenado desde su descarga, sin embargo, para la utilización de este proyecto en específico tenía
 la necesidad de identificar objetos en específico. Estos objetos que se plantearon en la ubicación son los siguientes: <br />
@@ -84,8 +93,4 @@ Se encuentran dos funciones, genéricamente la función llamada **mutiprocessing
 dos funciones se ponen a disposición de los usuarios para que se utilicen dos tipos de abarcamiento de los algoritmos, la primera utilizando el multiprocesamiento y la segunda
 mediante el uso de hilos.
 
-## Estudiantes
-Realizado por: 
-- Jose Ignacio Alfaro Solano <a href="https://github.com/jalfaros">GitHub<a/>
-- Warner Fidel Hurtado Laguna <a href="https://github.com/warnerHurtado">GitHub<a/>
 
