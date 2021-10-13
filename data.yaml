@@ -1,5 +1,0 @@
-train: /home/nacho/Desktop/yolov5/datasets/images
-val: ./home/nacho/Desktop/yolov5/datasets/images
-
-nc: 1
-names: ['gun']

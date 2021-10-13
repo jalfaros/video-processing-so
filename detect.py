@@ -305,5 +305,6 @@ def main(opt):
 
 
 if __name__ == "__main__":
+    print("Analizando coincidencias... \n")
     opt = parse_opt()
     main(opt)
