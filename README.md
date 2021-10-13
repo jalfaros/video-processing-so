@@ -44,8 +44,9 @@ Esta función descrita anteriormente se encuentra con el nombre <a href="https:/
 
 ## Resultados obtenidos
 
-<p float="center">
-  <img src="https://i.imgur.com/7SZ4EbR.jpg" width="500" />
+<p float="center" style="text-align:center;">
+  <img src="https://i.imgur.com/7SZ4EbR.jpg" width="400" />
+  <img src="https://i.imgur.com/AgukeWf.jpg" width="400" />
 </p>
 
 
