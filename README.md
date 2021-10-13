@@ -30,4 +30,4 @@ video era totalmente exagerado, arrojando consigo hasta 40 minutos en procesar u
 
 Dado el poco aprovechamiento en el procesamiento de video, se procedió a crear un algoritmo que se encarga en desestructurar el video en una imágen a partir de cada cuadro
 por segundo del video, por lo que así el manejo hacia la identificación de las clases en **Yolo** reducía considerablemente el tiempo en el que se procesaba.
-Esta función descrita anteriormente se encuentra con el nombre <a target="_blank" href="https://github.com/jalfaros/video-processing-so/blob/4acdb71d03bb89fd4c81c238a43e2960c0065c8b/videoProcessor.py#L9">VideoProcessor</a>
+Esta función descrita anteriormente se encuentra con el nombre <a href="https://github.com/jalfaros/video-processing-so/blob/4acdb71d03bb89fd4c81c238a43e2960c0065c8b/videoProcessor.py#L9" target="_blank">VideoProcessor</a>
