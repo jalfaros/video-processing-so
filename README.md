@@ -31,3 +31,43 @@ video era totalmente exagerado, arrojando consigo hasta 40 minutos en procesar u
 Dado el poco aprovechamiento en el procesamiento de video, se procedió a crear un algoritmo que se encarga en desestructurar el video en una imágen a partir de cada cuadro
 por segundo del video, por lo que así el manejo hacia la identificación de las clases en **Yolo** reducía considerablemente el tiempo en el que se procesaba.
 Esta función descrita anteriormente se encuentra con el nombre <a href="https://github.com/jalfaros/video-processing-so/blob/4acdb71d03bb89fd4c81c238a43e2960c0065c8b/videoProcessor.py#L9" target="_blank">VideoProcessor</a>
+
+
+## Resultados obtenidos
+
+<p float="center">
+  <img src="https://i.imgur.com/7SZ4EbR.jpg" width="500" />
+</p>
+
+
+
+
+## Tutorial
+
+Clonar el proyecto
+```git
+git clone https://github.com/jalfaros/video-processing-so.git
+```
+
+Una vez clonado el proyecto se debe ingresar a la carpeta
+
+```cmd
+cd video-processing-so
+```
+
+Una vez dentro de la carpeta donde se clonó el proyecto se procede a instalar las dependencias mediante el siguiente código:
+
+```cmd
+pip install -r requirements.txt
+```
+
+Cuando la instalación de las diferentes dependencias finalice correctamente es importante ubicar la ruta de los videos a procesar dentro de la lista que se encuentra en 
+el archivo con la extensión ***.py*** llamado ***videoProcessor*** cuya lista recibe el nombre de ***videoPaths***
+A continuación, se presenta un ejemplo de cómo debe de ser ingresadas las rutas dentro de la lista:
+
+```python
+videoPaths = ["C:\\Users\\Huawei D14\\Desktop\\videos_yolo\\kof.mp4",
+              "C:\\Users\\Huawei D14\\Desktop\\videos_yolo\\RHCP.mp4"]
+```
+
+
