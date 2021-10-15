@@ -49,9 +49,40 @@ Esta función descrita anteriormente se encuentra con el nombre <a href="https:/
   <img src="https://i.imgur.com/AgukeWf.jpg" width="400" />
 </p>
 
+Como se muestra en las figuras presentes, se puede observar la identificación de los distintos objetos que fueron entrenados para que **Yolo** marcara en las imágenes de
+los distintos videos que han sido suministrados previamente.
 
+## Modificaciones para la mejora del proceso de identificación
 
+Como se ha mencionado anteriormente, **Yolo** ya se encuentra de manera optimizada la parte de su procesamiento al momento de la identificación, sin embargo para la parte
+de la desestructuración de los distintos videos, se han hecho ciertos cambios principalmente para utilizar los distintos procesos de concurrencia que existen en **Python**
+para de esta manera reducir el tiempo del procesamiento de los videos.
+  
+La siguiente función es utilizada para la desestructuración del video en imágenes, esta función se encarga principalmente en crear una imágen por cada cuadro por segundo a su
+vez generando una carpeta para alojarlas
+```python
+videoProcessor()
+````
+  
+Los siguientes dos métodos hacen referencia a los distintos procesos de concurrencia utilizados para la mejora en el proceso de procesamiento de los videos e imágenes:
 
+Esta función se encarga de utilizar hilos para generar una instancia por cada ruta de video que se encuentre dentro de la lista, maximizando así la capacidad de abarcar
+más de un video a la vez.
+  
+```python
+threads()
+````
+
+Por último, esta función es utilizada para aprovechar todos los núcleos disponibles del CPU, esto para aumentar la capacidad de procesamiento de los distintos videos.
+
+```python
+multiprocessing()
+````
+  
+**Nota importante:** de las dos funciones anteriormente descritas, la que cuenta con mayor efectividad de tiempo en el procesamiento es la llamada: **multiprocessing()**
+
+Esta en distintas pruebas han demostrado tener una capacidad de hasta 30 segundos más rápida en comparación si se utilizaran hilos de concurrencia.
+  
 ## Tutorial
 
 Clonar el proyecto
@@ -71,8 +102,8 @@ Una vez dentro de la carpeta donde se clonó el proyecto se procede a instalar l
 pip install -r requirements.txt
 ```
 
-Cuando la instalación de las diferentes dependencias finalice correctamente es importante ubicar la ruta de los videos a procesar dentro de la lista que se encuentra en 
-el archivo con la extensión **.py** llamado **videoProcessor** cuya lista recibe el nombre de **videoPaths**
+<p style= "align:justify">Cuando la instalación de las diferentes dependencias finalice correctamente es importante ubicar la ruta de los videos a procesar dentro de la lista que se encuentra en 
+el archivo con la extensión **.py** llamado **videoProcessor** cuya lista recibe el nombre de **videoPaths**</p>
 A continuación, se presenta un ejemplo de cómo debe de ser ingresadas las rutas dentro de la lista:
 
 ```python
