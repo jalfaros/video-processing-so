@@ -103,7 +103,7 @@ pip install -r requirements.txt
 ```
 
 <p style= "align:justify">Cuando la instalación de las diferentes dependencias finalice correctamente es importante ubicar la ruta de los videos a procesar dentro de la lista que se encuentra en 
-el archivo con la extensión **.py** llamado **videoProcessor** cuya lista recibe el nombre de **videoPaths**</p>
+el archivo con la extensión <strong>.py</strong> llamado <strong>videoProcessor</strong> cuya lista recibe el nombre de <strong>videoPaths</strong></p>
 A continuación, se presenta un ejemplo de cómo debe de ser ingresadas las rutas dentro de la lista:
 
 ```python
@@ -113,7 +113,7 @@ videoPaths = ["C:\\Users\\Huawei D14\\Desktop\\videos_yolo\\kof.mp4",
 
 Dependiendo del rendimiento de la máquina y las especificaciones de las mismas no se recomienda procesar más de tres videos a la vez.
 
-Finalmente, dentro del mismo archivo llamado **videoProcessor.py** se encuentra el siguiente fragmento de código:
+Finalmente, dentro del mismo archivo llamado <strong>videoProcessor.py</strong> se encuentra el siguiente fragmento de código:
 
 ```python
 if __name__ == '__main__':
@@ -121,8 +121,7 @@ if __name__ == '__main__':
     #threads()
 ```
 
-Se encuentran dos funciones, genéricamente la función llamada **mutiprocessing()** se encuentra descomentada y la otra función llamada **threads()** está comentada; estas
-dos funciones se ponen a disposición de los usuarios para que se utilicen dos tipos de abarcamiento de los algoritmos, la primera utilizando el multiprocesamiento y la segunda
-mediante el uso de hilos.
+Se encuentran dos funciones, genéricamente la función llamada **mutiprocessing()** se encuentra descomentada y la otra función llamada <strong>threads()</strong> está comentada; estas dos funciones se ponen a disposición de los usuarios para que se utilicen dos tipos de abarcamiento de los algoritmos, la primera utilizando el multiprocesamiento y la segunda mediante el uso de hilos.
 
+  
 
