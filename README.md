@@ -9,7 +9,7 @@ Proyecto creado por:
 
 # Análisis de videos mediante la utilización del software llamado **YoloV5**
 
-Primeramente, para realizar el análisis de los distintos videos se utilizó el software llamado <strong>Yolo</strong> en su última versión <strong>5</strong> <br /> el cual
+Primeramente, para realizar el análisis de los distintos videos se utilizó el software llamado <strong>Yolo</strong> en su última versión <strong>5</strong> el cual
 se utiliza para la identificación de atributos en videos y/o imágenes.
 
 ## Entrenamiento realizado
